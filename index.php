@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="header btn-warning" align="center">
+        <div class="header btn-info" align="center" style="border-radius:5px; padding: 10px 0 10px 0;">
             <h1><a href="index_f.html">Phonewave Payment Confirmation</a></h1>
             <p>A demo Payment Portal for Phonewave through Rave payment Gateway</p>
         </div>
@@ -22,8 +22,8 @@
         <?php
     if (isset($_GET['txref'])) {
         $ref = $_GET['txref'];
-        $amount = ""; //Correct Amount from Server
-        $currency = ""; //Correct Currency from Server
+        $amount = $phone_price; //Correct Amount from Server
+        $currency = "NGN"; //Correct Currency from Server
 
         $query = array(
             "SECKEY" => "FLWSECK-b8ac6947d5e13df6c14d760ab028cf2e-X",
@@ -60,18 +60,35 @@
              // please check other things like whether you already gave value for this ref
           // if the email matches the customer who owns the product etc
           //Give Value and return to Success page
-            echo("<h3>PAYMENT SUCCESSFUL. THANK YOU! YOUR PHONE WILL BE DELEIVERED WITHIN 3- 7 DAYS FROM THIS CONFIRMATION</h3>");
+            echo('<div align="center" class="col-md-12" style="margin-top:20px;  border: 1px solid #ccc; border-radius:5px;" >
+        <img src="images/ok.png" style="margin-top:20px;" width="200px" height:"200px">
+        <h5 style="margin-top:50px;">PAYMENT SUCCESSFUL. THANK YOU! <br> YOUR PHONE WILL BE DELEIVERED WITHIN 3- 7 DAYS FROM THIS CONFIRMATION</h5></div>');
         } 
         else {
             //Dont Give Value and return to Failure page
-             echo("<h3>FAILED TRANSACTION. PLEASE TRY AGAIN</h3>");
+             echo('<div align="center" class="col-md-12" style="margin-top:20px; border: 1px solid #ccc; border-radius:5px;" >
+        <img src="images/failed.png" style="margin-top:20px;" width="200px" height:"200px">
+        <h5 style="margin-top:50px;">FAILED TRANSACTION. PLEASE TRY AGAIN</h5></div>');
         }
     }
         else {
-      die('No reference supplied');
+      // die('No reference supplied');
+      echo('<div align="center" class="col-md-12" style="margin-top:20px; border: 1px solid #ccc; border-radius:5px;" >
+        <img src="images/ok.png" style="margin-top:20px;" width="200px" height:"200px">
+        <img src="images/failed.png" style="margin-top:20px;" width="200px" height:"200px">
+        <h5 style="margin-top:50px;">INCONCLUSIVE TRANSACTION. PLEASE TRY AGAIN</h5></div>');
     }
 
 ?>
+        <footer style="margin-top:60%;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p align="center">Copyright © phonewave 2018</p>
+                </div>
+            </div>
+        </footer>
     </div>
+
+        
 </body>
 </html>
