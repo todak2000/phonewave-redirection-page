@@ -20,14 +20,16 @@
         
 
         <?php
-    if (isset($_GET['txref'])) {
+        // include 'rave.php';
+    if (isset($_GET['txref']) && $_GET['totalPriceReal']) {
         $ref = $_GET['txref'];
-        $amount = $phone_price; //Correct Amount from Server
+        $amount = $_GET['totalPriceReal']; //Correct Amount from Server
         $currency = "NGN"; //Correct Currency from Server
 
         $query = array(
             "SECKEY" => "FLWSECK-b8ac6947d5e13df6c14d760ab028cf2e-X",
             "txref" => $ref,
+            "totalPriceReal" => $amount,
             "include_payment_entity" => "1"
         );
 
@@ -54,7 +56,7 @@
         $chargeResponsecode = $resp['data']['chargecode'];
         $chargeAmount = $resp['data']['amount'];
         $chargeCurrency = $resp['data']['currency'];
-
+print_r($response);
         if(($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($chargeAmount == $amount)  && ($chargeCurrency == $currency)) {
           // transaction was successful...
              // please check other things like whether you already gave value for this ref
@@ -69,6 +71,7 @@
              echo('<div align="center" class="col-md-12" style="margin-top:20px; border: 1px solid #ccc; border-radius:5px;" >
         <img src="images/failed.png" style="margin-top:20px;" width="200px" height:"200px">
         <h5 style="margin-top:50px;">FAILED TRANSACTION. PLEASE TRY AGAIN</h5></div>');
+            
         }
     }
         else {
@@ -77,6 +80,7 @@
         <img src="images/ok.png" style="margin-top:20px;" width="200px" height:"200px">
         <img src="images/failed.png" style="margin-top:20px;" width="200px" height:"200px">
         <h5 style="margin-top:50px;">INCONCLUSIVE TRANSACTION. PLEASE TRY AGAIN</h5></div>');
+      
     }
 
 ?>
